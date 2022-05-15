@@ -1,0 +1,137 @@
+<html>
+	<head>
+		<title>IT Nightmare</title>
+		<meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;' name='viewport' />
+	<script src="player.js"></script>
+	<script src="powerup.js"></script> 
+	<script src="spawner.js"></script>
+	<script src="enemy.js"></script>
+	<script src="hazard.js"></script>
+	<script src="bullet.js"></script>
+	<script src="Bonus.js"></script>
+	<script src="FloatingText.js"></script>
+	<script src="GUI.js"></script>
+	<script src="Game.js"></script>
+	
+	<script>
+	"use strict";
+	var w = window,
+   	d = document,
+    	e = d.documentElement,
+    	g = d.getElementsByTagName('body')[0],
+    	winx = w.innerWidth || e.clientWidth || g.clientWidth,
+    	winy = w.innerHeight|| e.clientHeight|| g.clientHeight;
+	//initial
+	var game = null;
+	document.onLoad = function(){
+		if(game === undefined || game === null)
+			game = new Game();
+	};
+	window.onLoad = function(){
+		game = new Game();
+	};
+	</script>
+	<style>
+	#alert, #alert2{text-align: center;align:center;position:absolute;float:left; margin-left:45%;visibility:hidden;font-family:fantasy;font-size:48px;color:red;}
+	#box,#player,.bullet,.enemy{width:40px; height:40px;position:absolute;left:150px; top:150px;align:center;vertical-align:middle;text-align:center;}
+	.hazard,.powerup,.bonus{position:absolute; width:50px; height:50px;}
+	.floatingText{position:absolute; width:400px; height:60px; font-size:32px; color:red; font-family:fantasy}
+	.bullet{width:1px;word-break: break-all;word-wrap: break-word;}
+	body{-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		overflow:hidden;
+		background-color: white;}
+	.shielded{
+		border: 2px dotted purple;
+		-webkit-animation-name: blinker;
+		-webkit-animation-duration: 1s;
+		-webkit-animation-timing-function: linear;
+		-webkit-animation-iteration-count: infinite;
+		
+		-moz-animation-name: blinker;
+		-moz-animation-duration: 1s;
+		-moz-animation-timing-function: linear;
+		-moz-animation-iteration-count: infinite;
+		
+		animation-name: blinker;
+		animation-duration: 1s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+	.outer-circle {
+		position:absolute;
+		background: #DED8D8;
+		border-radius: 50%;
+		height:60px;
+		width:60px;
+	}
+	.inner-circle {
+		background: #FFFDFD;
+		border-radius: 50%;
+		height:20px;
+		width:20px; 
+		margin: auto;
+		margin-top: 20px;
+	}
+	.outer-circle-small {
+		position:absolute;
+		background: #DED8D8;
+		border-radius: 50%;
+		height:40px;
+		width:40px;
+	}
+	.inner-circle-small {
+		background: #FFFDFD;
+		border-radius: 50%;
+		height:10px;
+		width:10px; 
+		margin: auto;
+		margin-top: 15px;
+	}
+	@keyframes blink { 
+	50% { border-color: purple; } 
+	}
+	.expiring{ /*or other element you want*/
+		border-color: red;
+		animation: blink .5s step-end infinite alternate;
+	}
+	img{width:20px; height:20px;}
+	</style>
+	</head>
+	<body onLoad="game = new Game();" oncontextmenu="return false;">
+		<div id="position"></div>
+		<div id="game">
+		<div width="40px" height="40px" id="player"></div>
+		<div id="alert">PAUSED</div>
+		<div id="alert2">DEFAULT</div>
+		<div id="help">
+		<table style="border: 1px solid black; position:relative; top:60px;" align="center">
+		<tr>
+			<td>Powerups - Collect These</td>
+			<td>
+				<ul>
+					<li><img src="coffee.png"> - Upgrades Abilities (+1 damage after max upgrade)</li>
+					<li><img src="box.png"> - Spawns Server (Turret)</li>
+					<li><img src="shield.png"> - Invulnerable for 10 sec (turns red at 3 sec left)</li>
+					<li><img src="software.png"> - Special Disk (Missle)</li>
+					<li><img src="wrench.png"> - +5% Speed (+1 damage @ max speed)</li>
+					<li><img src="star.png"> - +3 Efficiency (Damage) </li>
+					<li><img src="report.jpg"> - +15 Life </li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>
+		</table>
+		</div>
+		</div>
+	</body>
+</html>
